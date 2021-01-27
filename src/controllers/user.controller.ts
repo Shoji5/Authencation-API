@@ -6,6 +6,10 @@ import jwt from "jsonwebtoken";
 import { uploadImage } from "../utils/cloudinary";
 import fs from "fs";
 
+export async function GetInfo(req: Request, res: Response) {
+  res.json({ success: true, user: { ...(req.user as IUser).toJSON(), password: undefined } });
+}
+
 export async function UserLogin(req: Request, res: Response) {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.json({ success: false, msg: "user doesn't exist" });

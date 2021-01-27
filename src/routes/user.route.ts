@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   FacebookLogin,
+  GetInfo,
   GithubLogin,
   GoogleLogin,
   updateInfo,
@@ -15,6 +16,8 @@ import { validateUserUpdate } from "../middlewares/validateUserUpdate.middelware
 import upload from "../middlewares/multer.middleware";
 
 const UserRoute = Router();
+
+UserRoute.get("/", passport.authenticate("jwt", { session: false }), GetInfo);
 
 UserRoute.post("/login/local", validateUserLogin, UserLogin);
 
