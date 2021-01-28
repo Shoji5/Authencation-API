@@ -15,7 +15,10 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   uid: { type: String, required: true },
   email: { type: String },
-  image: { type: String },
+  image: {
+    type: String,
+    default: "https://res.cloudinary.com/tuanvu/image/upload/v1611841077/Auth/pt8bumgtzc3qwfar1nrf.png",
+  },
   bio: { type: String },
   phone: { type: String },
   password: { type: String, required: true },
