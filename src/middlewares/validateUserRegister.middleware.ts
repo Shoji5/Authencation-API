@@ -11,7 +11,7 @@ export default async function validateUserRegister(req: Request, res: Response, 
   let { error } = schema.validate(req.body);
   if (error) return res.json({ success: false, msg: error.details[0].message });
   try {
-    let user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({ domain: "local", email: req.body.email });
     if (user) return res.json({ success: false, msg: "Email already exists" });
     next();
   } catch (err) {
