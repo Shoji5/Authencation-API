@@ -21,7 +21,7 @@ const opts: StrategyOptions = {
 
 passport.use(
   new JWTStrategy(opts, async function (jwt_payload, done) {
-    let user = await User.findById(jwt_payload.id);
+    let user = await User.findOne({ uid: jwt_payload.uid });
     done(null, user);
   })
 );

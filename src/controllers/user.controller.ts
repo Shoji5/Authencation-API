@@ -14,8 +14,8 @@ export async function UserLogin(req: Request, res: Response) {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.json({ success: false, msg: "user doesn't exist" });
   if (!bcrypt.compareSync(req.body.password, user.password)) return res.json({ success: false, msg: "wrong password" });
-  let token = jwt.sign({ id: user.id }, secret);
-  let refresh_token = jwt.sign({ id: user.id }, secret_refresh);
+  let token = jwt.sign({ uid: user.uid }, secret);
+  let refresh_token = jwt.sign({ uid: user.uid }, secret_refresh);
   res.json({ success: true, user: { ...user.toJSON(), password: undefined }, token, refresh_token });
 }
 
