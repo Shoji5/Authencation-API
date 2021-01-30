@@ -17,7 +17,7 @@ export async function validateUserUpdate(req: Request, res: Response, next: Next
   const { error } = schema.validate(req.body);
   const info = req.user as any;
   if (req.body.email && req.body.email != info.email) {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ domain: "local", email: req.body.email });
     if (user) return res.json({ success: false, msg: "Email already exists" });
   }
   if (error) return res.json({ success: false, msg: error.details[0].message });

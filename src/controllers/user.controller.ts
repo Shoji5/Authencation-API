@@ -51,7 +51,7 @@ export async function updateInfo(req: Request, res: Response) {
       fs.unlinkSync(req.file.path);
     }
     const user = await User.findByIdAndUpdate(info._id as string, newData, { new: true });
-    res.json({ success: true, user });
+    res.json({ success: true, user: { ...user?.toJSON(), password: undefined } });
   } catch (err) {
     res.json({ success: false, msg: err });
   }
